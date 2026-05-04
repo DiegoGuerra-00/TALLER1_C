@@ -10,14 +10,15 @@ using namespace std;
 class Sistema
 {
     public:
-        Sistema();
-
+    Sistema();
     void iniciar();
     char mostrarMenu();
     void opcion1();
     void opcion2();
     void opcion3();
     void opcion4();
+    void opcion5();
+
 
 
     void cargarcancioes(const string& nombrearch);
@@ -26,14 +27,14 @@ class Sistema
     void espacio_linea();
     void mostrarActual();
     void pistaSgte();
-    void generarlistRandom();
+    void mezclarRandom();
 
     private:
     Nodo_canciones* canciones;
     Nodo_canciones* actual;
     Nodo_canciones* todo;
     bool reproducir;
-
+    bool modoRandom;
 
 };
 

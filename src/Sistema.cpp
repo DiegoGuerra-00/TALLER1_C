@@ -8,6 +8,7 @@ Sistema::Sistema()
     canciones = nullptr;
     actual = nullptr;
     reproducir = false;
+    modoRandom = false;
 
 }
 void Sistema::iniciar(){
@@ -34,6 +35,10 @@ void Sistema::iniciar(){
             case 'E':
                 opcion3();
                 break;
+            case 'S':
+                opcion4();
+                break;
+
             case 'X':
                 cout<< "Saliendo  del sistema..."<<endl;
                 break;
@@ -76,7 +81,6 @@ void Sistema::opcion1(){
 }
 
 void Sistema::opcion2(){
-    espacio_linea();
    if(actual !=nullptr && actual->anterior != nullptr){
       actual = actual->anterior;
       }
@@ -84,6 +88,18 @@ void Sistema::opcion2(){
 }
 void Sistema::opcion3(){
     pistaSgte();
+}
+void Sistema::opcion4(){
+    if(actual == nullptr){return;}
+    modoRandom = !modoRandom;
+
+    if(modoRandom){
+        cout<<"(S) ";
+        mezclarRandom();
+    }else{
+    cout<<"(Modo aleatorio desactivado) ";
+    }
+
 }
 void Sistema::espacio_linea(){
     cout<<" " << endl;
@@ -180,7 +196,22 @@ void Sistema::pistaSgte(){
 
 
 }
-void Sistema::generarlistRandom(){
+void Sistema::mezclarRandom(){
+     if (actual == nullptr) {return;}
+     Nodo_canciones* nuevo_inicio = actual->siguiente;
+     Nodo_canciones* nuevo_final = nullptr;
+
+     while(nuevo_inicio!= nullptr){
+        Nodo_canciones* nuevo_siguiente = nuevo_inicio->siguiente;
+        nuevo_inicio->siguiente = nuevo_final;
+        nuevo_inicio->anterior = nuevo_siguiente;
+        nuevo_final = nuevo_inicio;
+        nuevo_inicio = nuevo_siguiente;
+     }
+     actual->siguiente = nuevo_final;
+     nuevo_final->anterior = actual;
+
+
 
 }
 
