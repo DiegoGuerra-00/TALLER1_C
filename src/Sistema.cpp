@@ -5,10 +5,12 @@ using namespace std;
 #include <sstream>
 Sistema::Sistema()
 {
+    repetir = nada;
     canciones = nullptr;
     actual = nullptr;
     reproducir = false;
     modoRandom = false;
+
 
 }
 void Sistema::iniciar(){
@@ -38,6 +40,9 @@ void Sistema::iniciar(){
             case 'S':
                 opcion4();
                 break;
+            case 'R':
+                 opcion5();
+                 break;
 
             case 'X':
                 cout<< "Saliendo  del sistema..."<<endl;
@@ -101,6 +106,27 @@ void Sistema::opcion4(){
     }
 
 }
+ void Sistema::opcion5(){
+    if(actual == nullptr){return;}
+    if(repetir == nada){
+        repetir = repetirUnavez;
+    }else if(repetir == repetirUnavez){
+        repetir = repetirTODO;
+    }else{repetir =nada;}
+    if(repetir == repetirUnavez){
+        cout<<"(R)";
+    }else if(repetir == repetirTODO){
+        cout<<"(RA)";
+    }
+    if(modoRandom){
+        cout<<"(S)";
+    }
+    cout <<": "<< actual->dato.nombre<<endl;
+
+
+ }
+
+
 void Sistema::espacio_linea(){
     cout<<" " << endl;
 }
@@ -173,6 +199,7 @@ void Sistema::pistaSgte(){
     if(todo == nullptr){
         return;
     }
+    if(repetir == repetirUnavez){return;}
     if(actual != nullptr && actual->siguiente != nullptr){
         actual=actual->siguiente;
         return;
@@ -188,6 +215,12 @@ void Sistema::pistaSgte(){
         reproducir = true;
         mostrarActual();
         return;
+     }
+     if(actual->siguiente == nullptr){
+        actual = canciones;
+        if(modoRandom){
+            mezclarRandom();
+        }
      }
         actual = canciones;
         reproducir = true;
