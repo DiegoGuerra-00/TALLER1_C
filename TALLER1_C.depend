@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1777917483 source:c:\users\casa\desktop\cosas c++\taller1_c\src\sistema.cpp
+1777940537 source:c:\users\casa\desktop\cosas c++\taller1_c\src\sistema.cpp
 	"Sistema.h"
 	"Nodo_canciones.h"
 	<iostream>
 	<sstream>
 
-1777917082 c:\users\casa\desktop\cosas c++\taller1_c\include\sistema.h
+1777939940 c:\users\casa\desktop\cosas c++\taller1_c\include\sistema.h
 	"Nodo_canciones.h"
 	"listaCanciones.h"
 	<fstream>

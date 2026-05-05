@@ -41,6 +41,8 @@ class Sistema
         nada,repetirUnavez,repetirTODO
     };
     tipoRepeticion repetir;
+    void mostrarListaActual();
+    void saltoCancion(int numero);
 
 };
 

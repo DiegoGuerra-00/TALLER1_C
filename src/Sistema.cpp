@@ -43,6 +43,9 @@ void Sistema::iniciar(){
             case 'R':
                  opcion5();
                  break;
+            case 'A':
+                opcion6();
+                break;
 
             case 'X':
                 cout<< "Saliendo  del sistema..."<<endl;
@@ -125,6 +128,54 @@ void Sistema::opcion4(){
 
 
  }
+ void Sistema::opcion6(){
+
+    if(actual == nullptr){return;}
+    espacio_linea();
+    mostrarListaActual();
+    espacio_linea();
+    cout<<"Lista de reproduccion actual:"<< endl;
+
+    Nodo_canciones* sigCancionEnLista = actual->siguiente;
+    int num = 1;
+
+    if(sigCancionEnLista == nullptr){
+        char valor;
+        cout<<"Vacia"<<endl;
+        cout<<"Opciones:"<<endl;
+        cout<<"V - volver al menu principal";
+        cin>> valor;
+        valor = toupper(valor);
+        return;
+     }
+     while(sigCancionEnLista != nullptr){
+        cout<< num<<". "<<sigCancionEnLista->dato.nombre<<" - "<<sigCancionEnLista->dato.artista<<endl;
+        sigCancionEnLista = sigCancionEnLista->siguiente;
+        num++;
+      }
+    espacio_linea();
+    char valor;
+
+    cout<<"Opciones:"<<endl;
+    cout<<"S<num> - Saltar a la cancion seleccionada"<<endl;
+    cout<<"V - Volver al menu principal"<<endl;
+    cout<<"Eliga una opcion: ";
+    cin >> (valor);
+    while(valor != 'V' && valor != 'S'){
+        cout<<"Opcion invalida, reingrese (S o V): ";
+        cin>> valor;
+        valor = toupper(valor);
+    }
+    valor = toupper(valor);
+
+    if(valor == 'V'){return;}
+    if(valor == 'S'){
+    int numero;
+    cout<<"Eliga el numero de la cancion a saltar: ";
+    cin>> numero;
+    saltoCancion(numero);
+    }
+ }
 
 
 void Sistema::espacio_linea(){
@@ -191,7 +242,7 @@ void Sistema::mostrarActual(){
     if(reproducir){
         cout<<"Reproduciendo: ";
     }else{cout<<"En pausa: ";}
-    cout <<"("<< actual->dato.id <<")" << ": "<< actual->dato.nombre<<endl;
+    cout <<"("<< actual->dato.id <<") " <<actual->dato.nombre<<endl;
     cout << "Artista: " << actual->dato.artista << endl;
     cout << "Album: " << actual->dato.album<< " [" << actual->dato.fecha << "]" << endl;
 }
@@ -243,7 +294,22 @@ void Sistema::mezclarRandom(){
      }
      actual->siguiente = nuevo_final;
      nuevo_final->anterior = actual;
+}
 
+void Sistema::mostrarListaActual(){
+    cout <<"Actual ("<< actual->dato.id<<"): "<< actual->dato.nombre<< " - "<<actual->dato.artista<<endl;
+}
+void Sistema::saltoCancion(int numero){
+    Nodo_canciones* saltoNuevo = actual->siguiente;
+     if (saltoNuevo == nullptr) {return;}
+    int lugar = 1;
+
+    while(saltoNuevo != nullptr&& lugar<numero){
+            saltoNuevo = saltoNuevo->siguiente;
+            lugar++;
+    }
+    actual = saltoNuevo;
+    reproducir = true;
 
 
 }
