@@ -30,6 +30,7 @@ class Sistema
     void mostrarActual();
     void pistaSgte();
     void mezclarRandom();
+    void modificarEstadoarch();
 
     private://----privado
     Nodo_canciones* canciones;
@@ -37,8 +38,9 @@ class Sistema
     Nodo_canciones* todo;
     bool reproducir;
     bool modoRandom;
-    enum tipoRepeticion{
-        nada,repetirUnavez,repetirTODO
+    enum tipoRepeticion
+    {
+    nada,repetirUnavez,repetirTODO
     };
     tipoRepeticion repetir;
     void mostrarListaActual();

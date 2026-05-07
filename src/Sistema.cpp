@@ -48,6 +48,7 @@ void Sistema::iniciar(){
                 break;
 
             case 'X':
+                modificarEstadoarch();
                 cout<< "Saliendo  del sistema..."<<endl;
                 break;
             default:
@@ -77,7 +78,7 @@ char Sistema::mostrarMenu(){
     return toupper(opcion);
 }
 
-void Sistema::opcion1(){
+void Sistema::opcion1(){ //-------------------------
    if(actual == nullptr){
     return;
    }
@@ -85,19 +86,22 @@ void Sistema::opcion1(){
     espacio_linea();
     mostrarActual();
     espacio_linea();
+    modificarEstadoarch();
 
 }
 
-void Sistema::opcion2(){
+void Sistema::opcion2(){//-------------------------
    if(actual !=nullptr && actual->anterior != nullptr){
       actual = actual->anterior;
       }
+    modificarEstadoarch();
 
 }
-void Sistema::opcion3(){
+void Sistema::opcion3(){//-------------------------
     pistaSgte();
+    modificarEstadoarch();
 }
-void Sistema::opcion4(){
+void Sistema::opcion4(){//-------------------------
     if(actual == nullptr){return;}
     modoRandom = !modoRandom;
 
@@ -107,9 +111,10 @@ void Sistema::opcion4(){
     }else{
     cout<<"(Modo aleatorio desactivado) ";
     }
+    modificarEstadoarch();
 
 }
- void Sistema::opcion5(){
+ void Sistema::opcion5(){//-------------------------
     if(actual == nullptr){return;}
     if(repetir == nada){
         repetir = repetirUnavez;
@@ -125,17 +130,16 @@ void Sistema::opcion4(){
         cout<<"(S)";
     }
     cout <<": "<< actual->dato.nombre<<endl;
+    modificarEstadoarch();
 
 
  }
  void Sistema::opcion6(){
-
     if(actual == nullptr){return;}
     espacio_linea();
     mostrarListaActual();
     espacio_linea();
     cout<<"Lista de reproduccion actual:"<< endl;
-
     Nodo_canciones* sigCancionEnLista = actual->siguiente;
     int num = 1;
 
@@ -161,6 +165,7 @@ void Sistema::opcion4(){
     cout<<"V - Volver al menu principal"<<endl;
     cout<<"Eliga una opcion: ";
     cin >> (valor);
+    valor = toupper(valor);
     while(valor != 'V' && valor != 'S'){
         cout<<"Opcion invalida, reingrese (S o V): ";
         cin>> valor;
@@ -171,10 +176,12 @@ void Sistema::opcion4(){
     if(valor == 'V'){return;}
     if(valor == 'S'){
     int numero;
-    cout<<"Eliga el numero de la cancion a saltar: ";
-    cin>> numero;
+    cout<<"Eliga el numero de la cancion a saltar (solo numeros permitidos): ";
+    cin>> numero; // se da por hecho que el usuario solo ingresara  un numero de la lista
+
     saltoCancion(numero);
     }
+    modificarEstadoarch();
  }
 
 
@@ -208,9 +215,6 @@ void Sistema::cargarcancioes(const string& nombrearch){
         nuevo->siguiente = nullptr;
         nuevo->anterior = nullptr;
         agregarCancion(nuevo);
-
-
-
     }
     archivo.close();
 }
@@ -237,7 +241,6 @@ void Sistema::mostrarActual(){
         cout<<"Artista: ----"<< endl;
         cout<<"Album: -----[---]"<<endl;
         return;
-
     }
     if(reproducir){
         cout<<"Reproduciendo: ";
@@ -296,10 +299,10 @@ void Sistema::mezclarRandom(){
      nuevo_final->anterior = actual;
 }
 
-void Sistema::mostrarListaActual(){
+void Sistema::mostrarListaActual(){ //----------------------------
     cout <<"Actual ("<< actual->dato.id<<"): "<< actual->dato.nombre<< " - "<<actual->dato.artista<<endl;
 }
-void Sistema::saltoCancion(int numero){
+void Sistema::saltoCancion(int numero){ //-------------------
     Nodo_canciones* saltoNuevo = actual->siguiente;
      if (saltoNuevo == nullptr) {return;}
     int lugar = 1;
@@ -313,4 +316,36 @@ void Sistema::saltoCancion(int numero){
 
 
 }
+void Sistema::modificarEstadoarch(){//--------------------
+    ofstream arch("status.cfg");
+    Nodo_canciones* temporal;
+    if(actual == nullptr){return;}
+    if (arch.fail()){return;}
+
+    if(actual != nullptr){
+        arch<<"ACTUAL(id): "<<actual->dato.id<<endl;
+        temporal = actual->siguiente;
+    }else{
+        temporal = nullptr;
+    }
+    arch<<"REPRODUCIENDO: "<<actual->dato.nombre<<endl;
+    arch<<"ESTADO MODO ALEATORIO: ";
+    if(modoRandom){ // 1 SI ESTA ACTIVADO
+       arch<<"1"<<endl;
+    }else{
+        arch<<"0"<<endl;
+    }
+    arch<<"REPETICION: "<< repetir<<endl;
+    arch<<"LISTA PENDIENTE: ";
+    while(temporal != nullptr){
+        arch<< temporal->dato.id;
+        if(temporal->siguiente != nullptr){
+            arch<<",";
+        }
+        temporal = temporal->siguiente;
+    }arch<<endl;
+    arch.close();
+
+}
+
 

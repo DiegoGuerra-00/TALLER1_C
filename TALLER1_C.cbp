@@ -43,6 +43,7 @@
 		<Unit filename="src/Sistema.cpp" />
 		<Unit filename="src/listaCanciones.cpp" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="status.cfg" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
