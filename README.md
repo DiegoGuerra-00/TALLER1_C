@@ -14,3 +14,10 @@ Quizas el programa empiece con la cancion de ID 2, ya que se hizo la prueba de b
 
 **Para compilar:**
 Se puede usar un compilador compatible con c++
+Para cmd o similar (terminal de visual estudio), se debe estar en la posicion de la carpeta del proyecto, *ejemplo en foto* <img width="570" height="38" alt="image" src="https://github.com/user-attachments/assets/cd08c9ec-ebd8-46e8-9a76-c2b05cb679bc" />  el nombre de "TALLER1_C" vendria siendo el proyecto, justo en esa posicion se debe ejcutar lo siguiente : src\programa. <img width="736" height="365" alt="image" src="https://github.com/user-attachments/assets/a18af785-9341-42e4-90bc-1d91f2955b8b" /> 
+
+**OTRAS CONSIDERACIONES** :
+Se da por hecho que el usuario solo ingresara una sola opcion, por ejemplo, si se desea ejecutar la opcion W, solo se ingresara una sola W, no dos WW.
+Se da por hecho de que le usuario (en la parte donde pidan ingresar un entero) unicamente ingresara enteros
+
+F DIAGRAMA 🥀
