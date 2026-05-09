@@ -497,7 +497,7 @@ void Sistema::borrarDelArch(int numero){
     entrada.close();
     salir.close();
     remove("music_source.txt");
-    rename("copia.txt","music_source.txt");
+
 }
 
 

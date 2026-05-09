@@ -11,6 +11,11 @@ struct Cancion {
     string fecha;
     string duracion;
     string ruta;
+
+    Cancion();
+    Cancion(int id, const string& artista,
+            const string& album, int fecha,
+            int duracion, const string& ruta);
 };
 
 #endif // CANCION_H

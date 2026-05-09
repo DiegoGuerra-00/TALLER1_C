@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1778289327 source:c:\users\casa\desktop\cosas c++\taller1_c\src\sistema.cpp
+1778296901 source:c:\users\casa\desktop\cosas c++\taller1_c\src\sistema.cpp
 	"Sistema.h"
 	"Nodo_canciones.h"
 	<iostream>
@@ -14,7 +14,7 @@
 1778125018 c:\users\casa\desktop\cosas c++\taller1_c\include\nodo_canciones.h
 	"Cancion.h"
 
-1778125049 c:\users\casa\desktop\cosas c++\taller1_c\include\cancion.h
+1778298254 c:\users\casa\desktop\cosas c++\taller1_c\include\cancion.h
 	<iostream>
 
 1777846315 source:c:\users\casa\desktop\cosas c++\taller1_c\src\main.cpp
