@@ -8,6 +8,7 @@ Sistema::Sistema()
     repetir = nada;
     canciones = nullptr;
     actual = nullptr;
+    regristrado = nullptr;
     reproducir = false;
     modoRandom = false;
 
@@ -18,13 +19,9 @@ void Sistema::iniciar(){
     cargarcancioes("music_source.txt");
     cargarestado("status.cfg");
 
+    mostrarActual();
     do {
-        if (actual != nullptr) {
-        espacio_linea();
-        cout << "Actual: "
-         << actual->dato.nombre << " - "
-         << actual->dato.artista << endl;
-        }
+
          opcion = mostrarMenu();
 
         switch(opcion){
@@ -45,6 +42,9 @@ void Sistema::iniciar(){
                  break;
             case 'A':
                 opcion6();
+                break;
+            case 'L':
+                opcion7();
                 break;
 
             case 'X':
@@ -85,6 +85,7 @@ void Sistema::opcion1(){ //-------------------------
    reproducir  = !reproducir;
     espacio_linea();
     mostrarActual();
+
     espacio_linea();
     modificarEstadoarch();
 
@@ -93,12 +94,16 @@ void Sistema::opcion1(){ //-------------------------
 void Sistema::opcion2(){//-------------------------
    if(actual !=nullptr && actual->anterior != nullptr){
       actual = actual->anterior;
+      mostrarListaActual();
       }
     modificarEstadoarch();
+    mostrarListaActual();
 
 }
 void Sistema::opcion3(){//-------------------------
     pistaSgte();
+    mostrarListaActual();
+
     modificarEstadoarch();
 }
 void Sistema::opcion4(){//-------------------------
@@ -108,8 +113,11 @@ void Sistema::opcion4(){//-------------------------
     if(modoRandom){
         cout<<"(S) ";
         mezclarRandom();
+        mostrarListaActual();
+
     }else{
     cout<<"(Modo aleatorio desactivado) ";
+    mostrarListaActual();
     }
     modificarEstadoarch();
 
@@ -122,19 +130,19 @@ void Sistema::opcion4(){//-------------------------
         repetir = repetirTODO;
     }else{repetir =nada;}
     if(repetir == repetirUnavez){
-        cout<<"(R)";
+        cout<<"(R) ";
     }else if(repetir == repetirTODO){
-        cout<<"(RA)";
+        cout<<"(RA) ";
     }
     if(modoRandom){
-        cout<<"(S)";
+        cout<<"(S) ";
     }
-    cout <<": "<< actual->dato.nombre<<endl;
+    mostrarListaActual();
     modificarEstadoarch();
 
 
  }
- void Sistema::opcion6(){
+ void Sistema::opcion6(){//-----------------------
     if(actual == nullptr){return;}
     espacio_linea();
     mostrarListaActual();
@@ -147,7 +155,7 @@ void Sistema::opcion4(){//-------------------------
         char valor;
         cout<<"Vacia"<<endl;
         cout<<"Opciones:"<<endl;
-        cout<<"V - volver al menu principal";
+        cout<<"V - volver al menu principal: ";
         cin>> valor;
         valor = toupper(valor);
         return;
@@ -173,7 +181,7 @@ void Sistema::opcion4(){//-------------------------
     }
     valor = toupper(valor);
 
-    if(valor == 'V'){return;}
+    if(valor == 'V'){  mostrarListaActual(); return;}
     if(valor == 'S'){
     int numero;
     cout<<"Eliga el numero de la cancion a saltar (solo numeros permitidos): ";
@@ -181,14 +189,69 @@ void Sistema::opcion4(){//-------------------------
 
     saltoCancion(numero);
     }
+    espacio_linea();
+    mostrarListaActual();
     modificarEstadoarch();
  }
 
-
+ void Sistema::opcion7(){//--------------
+    if(actual == nullptr){
+        cout<<"Sin canciones registradas"<<endl;
+        return;
+    }else{
+        char opcion;
+        string nombrecancion,nombrearts,fecha,tiempo,ruta;
+        do{
+            mostrarListaActual();
+            mostrarSubMenuOpcionL();
+            cout<<"Eliga una opcion:";
+            cin >>opcion;
+            opcion = toupper(opcion);
+            switch(opcion){
+                case 'R':
+                    int num;
+                    cout<<"Seleccione el numero de la cancion (solo valores enteros permitidos): ";
+                    cin>>num;
+                    saltoCancion(num); // salta cancion
+                    mostrarListaActual(); // reproduce
+                    mezclarRandom();
+                    break;
+                case 'A':
+                    int numero;
+                    cout<<"Seleccione el numero de la cancion (solo valores enteros permitidos): ";
+                    cin>>numero;
+                    moverCancionAlFinal(numero);
+                    break;
+                case 'N':
+                    espacio_linea();
+                    cout <<"Agregar cancion al registro"<<endl;
+                    espacio_linea();
+                    cout<<"Nombre de la cancion; ";
+                    cin>>nombrecancion;
+                    cout<<"Nombre del artista; ";
+                    cin>>nombrearts;
+                    cout<<"Año de lanzamiento; ";
+                    cin>>fecha;
+                    cout<<"Tiempo en segundos; ";
+                    cin>>tiempo;
+                    cout<<"Ruta ubicacion del archivo; ";
+                    cin>>ruta;
+                    agregarCancionAltxt( nombrecancion, nombrearts, fecha, tiempo, ruta);
+                    break;
+                case 'D':
+                    int numeroBorrar;
+                    cout<<"Seleccione el numero de la cancion a borrar (solo valores enteros permitidos): ";
+                    cin>>numeroBorrar;
+                    borrarCancion(numeroBorrar);
+                    break;
+            }
+        }while(opcion != 'V');
+        mostrarListaActual();
+    }
+ }
 void Sistema::espacio_linea(){
     cout<<" " << endl;
 }
-
 void Sistema::cargarcancioes(const string& nombrearch){
     ifstream archivo;
     archivo.open(nombrearch,ios::in);
@@ -218,7 +281,7 @@ void Sistema::cargarcancioes(const string& nombrearch){
     }
     archivo.close();
 }
-void Sistema::cargarestado(const string& nombrearch){}
+void Sistema::cargarestado(const string& nombrearch){} // {ñ{ññ{{ñt{ñtr
 
 void Sistema::agregarCancion(Nodo_canciones* nueva) {
     nueva ->siguiente = nullptr;
@@ -313,8 +376,6 @@ void Sistema::saltoCancion(int numero){ //-------------------
     }
     actual = saltoNuevo;
     reproducir = true;
-
-
 }
 void Sistema::modificarEstadoarch(){//--------------------
     ofstream arch("status.cfg");
@@ -345,7 +406,100 @@ void Sistema::modificarEstadoarch(){//--------------------
         temporal = temporal->siguiente;
     }arch<<endl;
     arch.close();
+}
+void Sistema::listarRegistro(){
+
 
 }
+void Sistema::mostrarSubMenuOpcionL(){
+    espacio_linea();
+    cout<<"Canciones registradas:"<<endl;
+    Nodo_canciones* regristrado = actual->siguiente;
+    int num = 1;
+      while(regristrado != nullptr){
+        cout<< num<<". "<<regristrado->dato.nombre<<" - "<<regristrado->dato.artista<<endl;
+        regristrado = regristrado->siguiente;
+        num++;
+      }
+    espacio_linea();
+    cout<<"Opciones:"<<endl;
+    cout<<"R <num> - Reproducir cancion seleccionada"<<endl;
+    cout<<"A <num> -  Agregar cancion seleccionada al final de la lista de reproduccion actual "<<endl;
+    cout<<"N - Agregar cancion al registro de canciones "<<endl;
+    cout<<"D<num> - Eliminar cancion seleccionada "<<endl;
+    cout<<"V - Volver al menu principal "<<endl;
+}
+
+void Sistema::moverCancionAlFinal(int numero){
+    if(actual == nullptr || numero < 0){return;}
+    Nodo_canciones* copiaActual = actual;
+    Nodo_canciones* anterior = nullptr;
+    Nodo_canciones* ultimo = actual;
+    int pos = 1;
+    while(copiaActual != nullptr && pos < numero){
+        anterior = copiaActual;
+        copiaActual = copiaActual ->siguiente;
+        pos++;
+    }
+    if(copiaActual->siguiente == nullptr){return;}
+    if(anterior != nullptr){
+        anterior->siguiente = copiaActual->siguiente;
+        copiaActual->siguiente->anterior = anterior;
+    }else{
+        actual = copiaActual->siguiente;
+        actual->anterior = nullptr;
+    }
+    while(ultimo ->siguiente != nullptr){
+        ultimo = ultimo->siguiente;
+    }
+    ultimo->siguiente = copiaActual;
+    copiaActual->anterior = ultimo;
+    copiaActual->siguiente = nullptr;
+
+}
+void Sistema::agregarCancionAltxt(string nombrecancion,string nombrearts,string fecha,string tiempo,string ruta){
+    ofstream archivo("music_source.txt");
+    archivo<<nombrecancion<<";"<<nombrearts<<";"<<fecha<<";"<<tiempo<<";"<<ruta<<endl;
+    archivo.close();
+}
+void Sistema::borrarCancion(int numero){
+    if(actual == nullptr || numero < 0){return;}
+    Nodo_canciones* actualizar = actual;
+
+    if(numero ==1){
+        delete actualizar;
+        borrarDelArch(numero);
+        return;
+    }
+    int posicion  =1;
+    Nodo_canciones* antes = nullptr;
+    while(actualizar != nullptr && posicion <= numero){
+        antes = actualizar;
+        actualizar = actualizar->siguiente;
+        posicion++;
+    }
+    antes->siguiente = actualizar->siguiente;
+    delete actualizar;
+    borrarDelArch(numero);
+
+}
+void Sistema::borrarDelArch(int numero){
+    ifstream entrada("music_source.txt");
+    ofstream salir("copia.txt");
+
+    string linea;
+    int suma = 1;
+    while(getline(entrada,linea)){
+       if(suma != numero){
+        salir<<linea<<endl;
+       }suma++;
+    }
+    entrada.close();
+    salir.close();
+    remove("music_source.txt");
+    rename("copia.txt","music_source.txt");
+}
+
+
 
 

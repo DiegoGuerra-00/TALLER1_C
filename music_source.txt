@@ -1,10 +1,7 @@
-1,Fire Dance,Vivid BAD Squad,Fire Dance (Single),2025,210,C:\musica\fire_dance.mp3
 2,World is Mine,Ryo feat. Hatsune Miku,Supercell,2008,245,C:\musica\world_is_mine.mp3
 3,Bring Me To Life,Evanescence,Fallen,2003,235,C:\musica\bring_me_to_life.mp3
 4,Radioactive,Imagine Dragons,Night Visions,2012,186,C:\musica\radioactive.mp3
 5,Chandelier,Sia,1000 Forms of Fear,2014,216,C:\musica\chandelier.mp3
 6,Titanium,David Guetta,Nothing but the Beat,2011,245,C:\musica\titanium.mp3
-7,Show,Ado,Kyougen,2022,205,C:\musica\show.mp3
 8,Gimme Chocolate!!,BABYMETAL,BABYMETAL,2014,230,C:\musica\gimme_chocolate.mp3
-9,DESPECHA,Rosalia,Motomami,2022,180,C:\musica\despecha.mp3
 10,More,KDA,All Out,2020,210,C:\musica\more.mp3

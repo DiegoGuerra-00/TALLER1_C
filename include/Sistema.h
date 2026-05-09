@@ -20,9 +20,6 @@ class Sistema
     void opcion5(); // R
     void opcion6(); // A
     void opcion7(); // L
-
-
-
     void cargarcancioes(const string& nombrearch);
     void cargarestado(const string& nombrearch);
     void agregarCancion(Nodo_canciones* nueva);
@@ -31,11 +28,18 @@ class Sistema
     void pistaSgte();
     void mezclarRandom();
     void modificarEstadoarch();
+    void mostrarCancionActual();
+    void mostrarSubMenuOpcionL();
+    void moverCancionAlFinal(int numero);
+    void agregarCancionAltxt(string nombrecancion,string nombrearts,string fecha,string tiempo,string ruta);
+    void borrarCancion(int numero);
+    void borrarDelArch(int numero);
 
     private://----privado
     Nodo_canciones* canciones;
     Nodo_canciones* actual;
     Nodo_canciones* todo;
+    Nodo_canciones* regristrado;
     bool reproducir;
     bool modoRandom;
     enum tipoRepeticion
@@ -45,6 +49,7 @@ class Sistema
     tipoRepeticion repetir;
     void mostrarListaActual();
     void saltoCancion(int numero);
+    void listarRegistro();
 
 };
 

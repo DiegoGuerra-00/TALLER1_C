@@ -1,21 +1,21 @@
 # depslib dependency file v1.0
-1777940537 source:c:\users\casa\desktop\cosas c++\taller1_c\src\sistema.cpp
+1778289327 source:c:\users\casa\desktop\cosas c++\taller1_c\src\sistema.cpp
 	"Sistema.h"
 	"Nodo_canciones.h"
 	<iostream>
 	<sstream>
 
-1777939940 c:\users\casa\desktop\cosas c++\taller1_c\include\sistema.h
+1778289162 c:\users\casa\desktop\cosas c++\taller1_c\include\sistema.h
 	"Nodo_canciones.h"
 	"listaCanciones.h"
 	<fstream>
 	<iostream>
 
-1777845046 c:\users\casa\desktop\cosas c++\taller1_c\include\nodo_canciones.h
+1778125018 c:\users\casa\desktop\cosas c++\taller1_c\include\nodo_canciones.h
 	"Cancion.h"
 
-1777872988 c:\users\casa\desktop\cosas c++\taller1_c\include\cancion.h
-	<string>
+1778125049 c:\users\casa\desktop\cosas c++\taller1_c\include\cancion.h
+	<iostream>
 
 1777846315 source:c:\users\casa\desktop\cosas c++\taller1_c\src\main.cpp
 	<iostream>
