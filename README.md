@@ -23,5 +23,8 @@ Se da por hecho de que le usuario (en la parte donde pidan ingresar un entero) u
 Posiblemente el arch status se vea actualizado debido a la prueba del progama.
 
 
+Se que esta pasado la hora, pero es por temas de compilacion, en la siguiente imagen se ve otro ejemplo para visual estudio: <img width="662" height="475" alt="image" src="https://github.com/user-attachments/assets/4df7fde1-367a-44fe-acb4-5d36c2d85913" />
+
+
 
 F DIAGRAMA 🥀
