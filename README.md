@@ -12,3 +12,5 @@ El codigo completo fue realizado en "CodeBlocks",en algunas partes del progama (
 Utilize un archivo txt llamado "music_source.txt", ahi puse algunas canciones para usarse de prueba, no fui muy claro con las ids de las canciones, asi que les puse valores del 1 al 10. 
 Quizas el programa empiece con la cancion de ID 2, ya que se hizo la prueba de borrar una cancion, y funciono :D.
 
+**Para compilar:**
+Se puede usar un compilador compatible con c++
