@@ -20,4 +20,7 @@ Para cmd o similar (terminal de visual estudio), se debe estar en la posicion de
 Se da por hecho que el usuario solo ingresara una sola opcion, por ejemplo, si se desea ejecutar la opcion W, solo se ingresara una sola W, no dos WW.
 Se da por hecho de que le usuario (en la parte donde pidan ingresar un entero) unicamente ingresara enteros
 Posiblemente el arch status se vea actualizado debido a la prueba del progama.
+
+
+
 F DIAGRAMA 🥀
